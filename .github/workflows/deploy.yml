@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
   build:
-    needs: dependencies check
+    needs: dependencies-check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
