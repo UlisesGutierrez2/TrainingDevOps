@@ -41,7 +41,7 @@ jobs:
 
       - name: Save Image 
         uses: actions/upload-artifact@v4
-        run: docker save ${{ env.IMAGE_NAME}}:${{ github.sha }}
+        run: docker save -o mi-imagen.tar ${{ env.IMAGE_NAME}}:${{ github.sha }}
         
       - name : Upload Image Artifact
         uses: actions/upload-artifact@v4
@@ -69,4 +69,5 @@ jobs:
         with:
           image-ref: '${{ env.IMAGE_NAME}}:${{ github.sha }}'
           format: 'table'
+
           exit-code: '0'
