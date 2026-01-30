@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  IMAGE_NAME: ${{vars.IMAGE_NAME}}
+
 jobs:
   dependencies-check: 
     runs-on: ubuntu-latest
@@ -31,16 +34,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '18'
 
       - name: Build Docker Image
-        run: docker build -t ${{ env.IMAGE_NAME}}:${{ github.sha }}:${{github.sha}} .
+        run: docker build -t ${{ env.IMAGE_NAME}}:${{ github.sha }} .
 
       - name: Save Image 
         uses: actions/upload-artifact@v4
         with:
           name: docker-image
-          path: docker save -o mi-imagen.tar ${{ env.IMAGE_NAME}}:{{github.sha}}  
+          path: docker save -o mi-imagen.tar ${{ env.IMAGE_NAME}}:${{github.sha}}  
 
       - name : Upload Image Artifact
         uses: actions/upload-artifact@v4
